@@ -1,5 +1,6 @@
-#[derive(Queryable)]
-#[derive(Serialize, Deserialize)]
+use serde::{Serialize};
+
+#[derive(Queryable, Serialize)]
 pub struct Article {
     pub id: i32,
     pub title: String,

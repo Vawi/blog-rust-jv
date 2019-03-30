@@ -8,7 +8,6 @@ extern crate blog_rust_jv;
 extern crate diesel;
 
 use self::blog_rust_jv::*;
-use self::diesel::prelude::*;
 use rocket_contrib::json::Json;
 use self::model::*;
 use self::diesel::prelude::*;
@@ -18,8 +17,8 @@ fn index() -> &'static str {
     "Hello, world!"
 }
 
-#[get("/articles")]
-fn getArticle() -> Json<Vec<Article>> {
+#[get("/articles", format = "json")]
+fn article() -> Json<Vec<Article>> {
 
     use blog_rust_jv::schema::articles::dsl::*;
 
@@ -28,10 +27,14 @@ fn getArticle() -> Json<Vec<Article>> {
         .load::<Article>(&connection)
         .expect("Error loading posts");
 
+    for a in results.iter() {
+        println!("{}", a.title )
+    }
+
     Json(results)
 }
 
 fn main() {
     rocket::ignite().mount("/", routes![index]).launch();
-    rocket::ignite().mount("/articles", routes![getArticle]).launch();
+    rocket::ignite().mount("/article", routes![article]).launch();
 }
