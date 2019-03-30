@@ -11,6 +11,7 @@ use self::blog_rust_jv::*;
 use rocket_contrib::json::Json;
 use self::model::*;
 use self::diesel::prelude::*;
+use blog_rust_jv::schema::articles::dsl::*;
 
 #[get("/world")]
 fn index() -> &'static str {
@@ -20,21 +21,28 @@ fn index() -> &'static str {
 #[get("/article")]
 fn article() -> Json<Vec<Article>> {
 
-    use blog_rust_jv::schema::articles::dsl::*;
-
     let connection = establish_connection();
     let results = articles
         .load::<Article>(&connection)
         .expect("Error loading posts");
 
-    for a in results.iter() {
-        println!("{}", a.title )
-    }
+    return Json(results);
+}
+
+#[get("/article/<id_article>")]
+fn hello(id_article: i32) -> Json<Vec<Article>> {
+
+    let connection = establish_connection();
+    let results = articles
+        .filter(id.eq(id_article))
+        .load::<Article>(&connection)
+        .expect("Error loading posts");
 
     return Json(results);
 }
 
 fn main() {
     rocket::ignite().mount("/hello", routes![index])
+                    .mount("/hello", routes![hello])
                     .mount("/hello", routes![article]).launch();
 }
