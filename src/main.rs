@@ -12,12 +12,12 @@ use rocket_contrib::json::Json;
 use self::model::*;
 use self::diesel::prelude::*;
 
-#[get("/")]
+#[get("/world")]
 fn index() -> &'static str {
     "Hello, world!"
 }
 
-#[get("/articles", format = "json")]
+#[get("/article")]
 fn article() -> Json<Vec<Article>> {
 
     use blog_rust_jv::schema::articles::dsl::*;
@@ -31,10 +31,10 @@ fn article() -> Json<Vec<Article>> {
         println!("{}", a.title )
     }
 
-    Json(results)
+    return Json(results);
 }
 
 fn main() {
-    rocket::ignite().mount("/", routes![index]).launch();
-    rocket::ignite().mount("/article", routes![article]).launch();
+    rocket::ignite().mount("/hello", routes![index])
+                    .mount("/hello", routes![article]).launch();
 }
