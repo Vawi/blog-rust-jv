@@ -1,0 +1,10 @@
+[package]
+name = "blog-rust-jv"
+version = "0.1.0"
+authors = ["Vawi <valentin.winnen@orange.fr>"]
+edition = "2018"
+
+[dependencies]
+diesel = { version = "1.0.0", features = ["postgres"] }
+dotenv = "0.9.0"
+rocket = "0.4.0"
