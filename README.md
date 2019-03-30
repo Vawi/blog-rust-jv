@@ -1,0 +1,2 @@
+# blog-rust-jv
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/75d607f9bb914aa5a1249b5ff334c325)](https://app.codacy.com/app/Vawi/blog-rust-jv?utm_source=github.com&utm_medium=referral&utm_content=Vawi/blog-rust-jv&utm_campaign=Badge_Grade_Dashboard)
