@@ -42,7 +42,7 @@ fn hello(id_article: i32) -> Json<Vec<Article>> {
 }
 
 fn main() {
-    rocket::ignite().mount("/hello", routes![index])
-                    .mount("/hello", routes![hello])
-                    .mount("/hello", routes![article]).launch();
+    rocket::ignite().mount("/", routes![index])
+                    .mount("/", routes![hello])
+                    .mount("/", routes![article]).launch();
 }
